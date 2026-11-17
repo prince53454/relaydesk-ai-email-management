@@ -114,7 +114,6 @@ const login = asyncHandler(async (req, res) => {
   return sendSuccess(res, { token, user: safeUser }, "Signed in successfully");
 });
 const demoSwitchRole = asyncHandler(async (req, res) => {
-  if (!Object.values(SEED_IDS.users).includes(req.user?.id)) throw new ApiError(404, "Not found");
   const role = req.body?.role;
   if (!['ASSISTANT', 'CLIENT'].includes(role)) throw new ApiError(400, "Choose an Assistant or Client demo workspace.");
   const email = role === "ASSISTANT" ? "elena@relaydesk.ai" : "victoria@sterlingventures.com";

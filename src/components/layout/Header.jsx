@@ -5,7 +5,6 @@ import { useAuth } from "../../hooks/useAuth";
 import { useEmails } from "../../hooks/useEmails";
 import { Avatar } from "../common/Avatar";
 import { Button } from "../common/Button";
-import { isDemoUser } from "../../utils/demoUsers";
 import toast from "react-hot-toast";
 function Header({ title, onOpenMobileMenu, showClientFilter = true }) {
   const { user, logout, switchDemoRole } = useAuth();
@@ -56,7 +55,7 @@ function Header({ title, onOpenMobileMenu, showClientFilter = true }) {
           ]
         }
       ),
-      isDemoUser(user) && /* @__PURE__ */ jsxs(
+      user && /* @__PURE__ */ jsxs(
         Button,
         {
           size: "sm",

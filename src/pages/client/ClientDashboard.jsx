@@ -11,7 +11,6 @@ import { EmptyState } from "../../components/common/EmptyState";
 import { ConversationThread } from "../../components/emails/ConversationThread";
 import { AIReplyGenerator } from "../../components/ai/AIReplyGenerator";
 import { formatShortDateTime } from "../../utils/formatDate";
-import { isDemoUser } from "../../utils/demoUsers";
 import toast from "react-hot-toast";
 
 function ClientDashboard() {
@@ -139,7 +138,7 @@ function ClientDashboard() {
     <header className="h-14 px-4 sm:px-8 bg-white border-b border-[#E2E8F0] flex items-center justify-between gap-4 sticky top-0 z-30">
       <Link to="/client" className="font-display text-base font-bold tracking-tight text-[#0F172A]">RelayDesk</Link>
       <div className="flex items-center gap-3">
-        {isDemoUser(user) && <button type="button" onClick={async () => { try { await switchDemoRole("ASSISTANT"); navigate("/assistant"); } catch { toast.error("Could not switch demo workspace"); } }} className="inline-flex items-center gap-1.5 px-2 py-1.5 rounded text-xs font-medium text-[#475569] hover:bg-[#F1F5F9]" title="Switch to Executive demo view"><ArrowLeftRight className="h-3.5 w-3.5"/><span className="hidden sm:inline">Executive view</span></button>}
+        {user && <button type="button" onClick={async () => { try { await switchDemoRole("ASSISTANT"); navigate("/assistant"); } catch { toast.error("Could not switch demo workspace"); } }} className="inline-flex items-center gap-1.5 px-2 py-1.5 rounded text-xs font-medium text-[#475569] hover:bg-[#F1F5F9]" title="Switch to Executive demo view"><ArrowLeftRight className="h-3.5 w-3.5"/><span className="hidden sm:inline">Executive view</span></button>}
         <Link to="/client/settings" className="text-sm text-[#475569] hover:text-[#0F172A]">Preferences</Link>
         {user && <Avatar name={user.name} avatarKey={user.avatar} size="sm"/>}
         <button type="button" aria-label="Sign out" onClick={async () => { await logout(); navigate("/register"); }} className="inline-flex items-center gap-1.5 px-2 py-1.5 text-xs font-medium text-[#64748B] hover:text-[#DC2626] rounded cursor-pointer"><LogOut className="h-4 w-4"/><span>Sign out</span></button>
