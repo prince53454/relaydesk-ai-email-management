@@ -1,16 +1,14 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight, MailCheck, ShieldCheck } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
 import { Button } from "../../components/common/Button";
 import { Input } from "../../components/common/Input";
 import toast from "react-hot-toast";
 function Login() {
-  const { login, logout } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const activePortal = searchParams.get("portal") === "ASSISTANT" ? "ASSISTANT" : "CLIENT";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -18,10 +16,6 @@ function Login() {
     setLoading(true);
     try {
       const user = await login(targetEmail, targetPass);
-      if (user.role !== activePortal) {
-        await logout();
-        throw new Error(`This account belongs to the ${user.role === "ASSISTANT" ? "Executive" : "Client"} portal. Select the matching tab.`);
-      }
       toast.success(`Welcome back, ${user.name}`);
       if (!user.onboardingCompleted) {
         navigate("/onboarding");

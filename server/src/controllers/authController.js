@@ -8,7 +8,6 @@ import { recordActivity } from "../services/notificationService.js";
 import { sendRegistrationEmail } from "../services/email/registrationMailer.js";
 import { logger } from "../utils/logger.js";
 import { SEED_IDS } from "../seed/seedUsers.js";
-import { env } from "../config/environment.js";
 function sanitizeUser(user) {
   const { password: _pwd, ...safe } = user;
   return safe;
@@ -115,7 +114,7 @@ const login = asyncHandler(async (req, res) => {
   return sendSuccess(res, { token, user: safeUser }, "Signed in successfully");
 });
 const demoSwitchRole = asyncHandler(async (req, res) => {
-  if (env.NODE_ENV === "production") throw new ApiError(404, "Not found");
+  if (!Object.values(SEED_IDS.users).includes(req.user?.id)) throw new ApiError(404, "Not found");
   const role = req.body?.role;
   if (!['ASSISTANT', 'CLIENT'].includes(role)) throw new ApiError(400, "Choose an Assistant or Client demo workspace.");
   const email = role === "ASSISTANT" ? "elena@relaydesk.ai" : "victoria@sterlingventures.com";
