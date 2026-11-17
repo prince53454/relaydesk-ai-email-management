@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowRight, MailCheck, ShieldCheck } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
 import { Button } from "../../components/common/Button";
@@ -9,7 +9,8 @@ import toast from "react-hot-toast";
 function Login() {
   const { login, logout } = useAuth();
   const navigate = useNavigate();
-  const [activePortal, setActivePortal] = useState("CLIENT");
+  const [searchParams] = useSearchParams();
+  const activePortal = searchParams.get("portal") === "ASSISTANT" ? "ASSISTANT" : "CLIENT";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -59,11 +60,6 @@ function Login() {
       /* @__PURE__ */ jsxs("div", { children: [
         /* @__PURE__ */ jsx("h2", { className: "font-display text-xl font-semibold text-[#0F172A]", children: "Sign in to workspace" }),
         /* @__PURE__ */ jsx("p", { className: "text-xs text-[#64748B] mt-1", children: "Enter your email and password to continue." }),
-        /* @__PURE__ */ jsxs("div", { role: "tablist", "aria-label": "Choose workspace", className: "mt-5 grid grid-cols-2 gap-1 rounded-lg bg-[#F1F5F9] p-1", children: [
-          /* @__PURE__ */ jsx("button", { type: "button", role: "tab", "aria-selected": activePortal === "ASSISTANT", onClick: () => setActivePortal("ASSISTANT"), className: `rounded-md px-3 py-2 text-sm font-medium transition-colors ${activePortal === "ASSISTANT" ? "bg-white text-[#0F172A] shadow-sm" : "text-[#64748B] hover:text-[#0F172A]"}`, children: "Executive" }),
-          /* @__PURE__ */ jsx("button", { type: "button", role: "tab", "aria-selected": activePortal === "CLIENT", onClick: () => setActivePortal("CLIENT"), className: `rounded-md px-3 py-2 text-sm font-medium transition-colors ${activePortal === "CLIENT" ? "bg-white text-[#0F172A] shadow-sm" : "text-[#64748B] hover:text-[#0F172A]"}`, children: "Client" })
-        ] }),
-        /* @__PURE__ */ jsx("p", { className: "mt-2 text-xs text-[#64748B]", children: activePortal === "ASSISTANT" ? "Executive Assistant workspace" : "Executive Client workspace" }),
         /* @__PURE__ */ jsxs("form", { onSubmit: handleSubmit, className: "mt-4 space-y-4", children: [
           /* @__PURE__ */ jsx(
             Input,

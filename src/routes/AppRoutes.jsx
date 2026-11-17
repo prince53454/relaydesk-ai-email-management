@@ -8,6 +8,7 @@ import { RoleBasedRoute } from "./RoleBasedRoute";
 const lazyPage = (load, name) => lazy(() => load().then((module) => ({ default: module[name] })));
 
 const Login = lazyPage(() => import("../pages/auth/Login.jsx"), "Login");
+const Home = lazyPage(() => import("../pages/Home.jsx"), "Home");
 const Register = lazyPage(() => import("../pages/auth/Register.jsx"), "Register");
 const OnboardingFlow = lazyPage(() => import("../pages/onboarding/OnboardingFlow.jsx"), "OnboardingFlow");
 const AssistantDashboard = lazyPage(() => import("../pages/assistant/AssistantDashboard.jsx"), "AssistantDashboard");
@@ -19,14 +20,6 @@ const SettingsPage = lazyPage(() => import("../pages/assistant/SettingsPage.jsx"
 const ClientDashboard = lazyPage(() => import("../pages/client/ClientDashboard.jsx"), "ClientDashboard");
 const ClientSettings = lazyPage(() => import("../pages/client/ClientSettings.jsx"), "ClientSettings");
 const NotFound = lazyPage(() => import("../pages/NotFound.jsx"), "NotFound");
-
-function RootRedirect() {
-  const { user, loading } = useAuth();
-  if (loading) return <Loader />;
-  if (!user) return <Navigate to="/register" replace />;
-  if (!user.onboardingCompleted) return <Navigate to="/onboarding" replace />;
-  return <Navigate to={user.role === "ASSISTANT" ? "/assistant" : "/client"} replace />;
-}
 
 function AssistantRoute({ children }) {
   return <ProtectedRoute><RoleBasedRoute allowedRole="ASSISTANT">{children}</RoleBasedRoute></ProtectedRoute>;
@@ -41,7 +34,7 @@ function AppRoutes() {
     <BrowserRouter>
       <Suspense fallback={<div className="min-h-screen grid place-items-center bg-[#F8FAFC]"><Loader /></div>}>
         <Routes>
-          <Route path="/" element={<RootRedirect />} />
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/onboarding" element={<ProtectedRoute><OnboardingFlow /></ProtectedRoute>} />

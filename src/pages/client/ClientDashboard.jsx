@@ -28,23 +28,31 @@ function ClientDashboard() {
   const [handoverSaving, setHandoverSaving] = useState(false);
   const detailRequestId = useRef(0);
   const pendingThreadId = useRef(null);
+  const conversationRequestId = useRef(0);
 
   const loadConversations = useCallback(async ({ silent = false } = {}) => {
+    const requestId = ++conversationRequestId.current;
     if (!silent) {
       setLoading(true);
       setLoadError("");
     }
     try {
-      const result = await emailService.list({ classification: "CLIENT_TO_REPLY", status: "ACTIVE", limit: 100, sort: "priority" });
-      setConversations(result.emails || []);
+      let result = await emailService.list({ classification: "CLIENT_TO_REPLY", status: "ACTIVE", limit: 100, sort: "priority" });
+      // A session transition can race the first request; recheck an empty initial response once.
+      if (!silent && user?.id && (result.emails || []).length === 0) {
+        await new Promise((resolve) => window.setTimeout(resolve, 250));
+        result = await emailService.list({ classification: "CLIENT_TO_REPLY", status: "ACTIVE", limit: 100, sort: "priority" });
+      }
+      if (requestId === conversationRequestId.current) setConversations(result.emails || []);
     } catch (err) {
+      if (requestId !== conversationRequestId.current) return;
       const message = err instanceof Error ? err.message : "Could not load emails needing your attention";
       if (!silent) {
         setLoadError(message);
         toast.error(message);
       }
-    } finally { if (!silent) setLoading(false); }
-  }, []);
+    } finally { if (!silent && requestId === conversationRequestId.current) setLoading(false); }
+  }, [user?.id]);
   useEffect(() => {
     loadConversations();
     const refresh = () => {
@@ -56,7 +64,7 @@ function ClientDashboard() {
       window.clearInterval(timer);
       window.removeEventListener("focus", refresh);
     };
-  }, [loadConversations]);
+  }, [loadConversations, user?.id]);
 
   const openThread = useCallback(async (id) => {
     if (pendingThreadId.current === id) return;
