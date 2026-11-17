@@ -12,14 +12,12 @@ function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const role = "CLIENT";
-  const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const result = await register({ name, email, password, role, title });
+      const result = await register({ name, email, password });
       if (result.emailSent) {
         toast.success("Account created and welcome email sent");
       } else {
@@ -48,15 +46,6 @@ function Register() {
           onChange: (e) => setName(e.target.value),
           required: true,
           placeholder: "Jordan Taylor"
-        }
-      ),
-      /* @__PURE__ */ jsx(
-        Input,
-        {
-          label: "Role / Title",
-          value: title,
-          onChange: (e) => setTitle(e.target.value),
-          placeholder: role === "ASSISTANT" ? "Executive Assistant" : "Managing Partner"
         }
       ),
       /* @__PURE__ */ jsx(
