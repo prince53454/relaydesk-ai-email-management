@@ -2,6 +2,8 @@
 
 RelayDesk is a full-stack intelligent email management platform built for Personal Assistants and their Executive Clients. It automatically classifies conversation ownership (`ASSISTANT_TO_REPLY`, `CLIENT_TO_REPLY`, `NO_REPLY_NEEDED`, `NEEDS_REVIEW`), generates structured executive summaries, drafts context-aware replies, extracts meetings & action items, and provides a dedicated Client Portal for approvals and instant assistant handover.
 
+**Live demo:** [relaydesk-ai-email-management.onrender.com](https://relaydesk-ai-email-management.onrender.com)
+
 ## Demo Login Credentials
 
 ### Personal Assistants
