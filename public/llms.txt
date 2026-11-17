@@ -1,0 +1,10 @@
+# RelayDesk
+
+RelayDesk is an AI-powered email management dashboard for personal assistants and their clients. It organizes conversations, highlights decisions and follow-ups, summarizes threads, and supports assistant-to-client handover.
+
+## Product
+
+- [Sign in](/login): Open the workspace.
+- [Create an account](/register): Start a client workspace.
+
+The application is a prototype. Demo workspaces use sample emails and simulated mailbox actions unless a provider account has been connected and authorized.

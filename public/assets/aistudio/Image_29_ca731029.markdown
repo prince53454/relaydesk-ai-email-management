@@ -1,0 +1,227 @@
+---
+name: Executive Precision Engine
+colors:
+  surface: '#f8f9ff'
+  surface-dim: '#cbdbf5'
+  surface-bright: '#f8f9ff'
+  surface-container-lowest: '#ffffff'
+  surface-container-low: '#eff4ff'
+  surface-container: '#e5eeff'
+  surface-container-high: '#dce9ff'
+  surface-container-highest: '#d3e4fe'
+  on-surface: '#0b1c30'
+  on-surface-variant: '#434655'
+  inverse-surface: '#213145'
+  inverse-on-surface: '#eaf1ff'
+  outline: '#737686'
+  outline-variant: '#c3c6d7'
+  surface-tint: '#0053db'
+  primary: '#004ac6'
+  on-primary: '#ffffff'
+  primary-container: '#2563eb'
+  on-primary-container: '#eeefff'
+  inverse-primary: '#b4c5ff'
+  secondary: '#712ae2'
+  on-secondary: '#ffffff'
+  secondary-container: '#8a4cfc'
+  on-secondary-container: '#fffbff'
+  tertiary: '#006243'
+  on-tertiary: '#ffffff'
+  tertiary-container: '#007d57'
+  on-tertiary-container: '#bdffdc'
+  error: '#ba1a1a'
+  on-error: '#ffffff'
+  error-container: '#ffdad6'
+  on-error-container: '#93000a'
+  primary-fixed: '#dbe1ff'
+  primary-fixed-dim: '#b4c5ff'
+  on-primary-fixed: '#00174b'
+  on-primary-fixed-variant: '#003ea8'
+  secondary-fixed: '#eaddff'
+  secondary-fixed-dim: '#d2bbff'
+  on-secondary-fixed: '#25005a'
+  on-secondary-fixed-variant: '#5a00c6'
+  tertiary-fixed: '#85f8c4'
+  tertiary-fixed-dim: '#68dba9'
+  on-tertiary-fixed: '#002114'
+  on-tertiary-fixed-variant: '#005137'
+  background: '#f8f9ff'
+  on-background: '#0b1c30'
+  surface-variant: '#d3e4fe'
+typography:
+  display-lg:
+    fontFamily: Geist
+    fontSize: 32px
+    fontWeight: '600'
+    lineHeight: 40px
+    letterSpacing: -0.025em
+  display-lg-mobile:
+    fontFamily: Geist
+    fontSize: 26px
+    fontWeight: '600'
+    lineHeight: 34px
+    letterSpacing: -0.02em
+  headline-lg:
+    fontFamily: Geist
+    fontSize: 22px
+    fontWeight: '600'
+    lineHeight: 28px
+    letterSpacing: -0.02em
+  headline-md:
+    fontFamily: Geist
+    fontSize: 18px
+    fontWeight: '600'
+    lineHeight: 24px
+    letterSpacing: -0.015em
+  title-sm:
+    fontFamily: Inter
+    fontSize: 15px
+    fontWeight: '500'
+    lineHeight: 20px
+    letterSpacing: -0.01em
+  body-md:
+    fontFamily: Inter
+    fontSize: 14px
+    fontWeight: '400'
+    lineHeight: 20px
+    letterSpacing: -0.006em
+  body-sm:
+    fontFamily: Inter
+    fontSize: 13px
+    fontWeight: '400'
+    lineHeight: 18px
+    letterSpacing: 0em
+  label-md:
+    fontFamily: Geist
+    fontSize: 12px
+    fontWeight: '500'
+    lineHeight: 16px
+    letterSpacing: 0.01em
+  label-sm:
+    fontFamily: Geist
+    fontSize: 11px
+    fontWeight: '500'
+    lineHeight: 14px
+    letterSpacing: 0.02em
+  code-sm:
+    fontFamily: JetBrains Mono
+    fontSize: 12px
+    fontWeight: '400'
+    lineHeight: 16px
+    letterSpacing: -0.01em
+rounded:
+  sm: 0.125rem
+  DEFAULT: 0.25rem
+  md: 0.375rem
+  lg: 0.5rem
+  xl: 0.75rem
+  full: 9999px
+spacing:
+  gutter: 1rem
+  gutter-compact: 0.5rem
+  margin: 1.5rem
+  margin-mobile: 1rem
+  space-xs: 0.25rem
+  space-sm: 0.5rem
+  space-md: 0.75rem
+  space-lg: 1.25rem
+  space-xl: 2rem
+---
+
+## Brand & Style
+
+This design system is tailored for an executive-grade, AI-powered email intelligence platform. The user interface prioritizes extreme efficiency, hyper-focus, and clarity, drawing cues from high-performance productivity tools like Linear, Superhuman, and Attio.
+
+### Visual Ethos
+- **Precision Minimalist**: Pure functional elegance. Space is structured to maximize scanning speed and minimize cognitive friction.
+- **Instrument-grade Density**: UI components leverage compact vertical footprints, razor-sharp 1px structural framing, and deliberate keyboard-first affordances.
+- **Subdued Canvas with Intentional Accents**: Neutral surfaces step back entirely, allowing AI classification semantics and triage states to communicate urgency and priority instantly.
+- **Micro-tactility**: Subtle hover states, seamless inline transitions, floating glass copilot docks, and crisp feedback states cultivate an atmosphere of speed, responsiveness, and executive calm.
+
+## Colors
+
+The palette establishes an executive-level reading environment. The foundation relies on cool, slate-tinted neutrals, anchoring deep charcoal typography against crisp container layers. Purposeful classification colors handle rapid visual triage across incoming communications.
+
+### Semantic & Classification Roles
+- **Primary / Assistant to Reply (`#2563EB`)**: High-fidelity royal blue signaling queued AI drafts, auto-compositions, or proactive agent interventions.
+- **Secondary / Client to Reply (`#7C3AED`)**: Rich violet designating items awaiting outbound response from the external user or client.
+- **Tertiary / Success (`#059669`)**: Emerald green for confirmed actions, scheduled sends, resolved conversations, and zero-inbox completions.
+- **Neutral / No Reply Needed (`#64748B`)**: Cool slate for non-actionable receipts, notification feeds, low-priority automated threads, and dormant states.
+- **Warning / Needs Review (`#D97706`)**: Warm amber for AI-generated drafts requiring human sign-off, flagged tone discrepancies, or ambiguous routing.
+- **Destructive / Urgent (`#DC2626`)**: Vivid crimson reserved exclusively for imminent deadlines, critical security flags, VIP escalations, or destructive operations.
+
+### Surface Tones
+- **Canvas Base**: `#F8FAFC` (Slate 50) for primary application background.
+- **Surface Elevation 1 (Card/List Base)**: `#FFFFFF` (Pure White) with 1px border `#E2E8F0` (Slate 200).
+- **Surface Elevation 2 (Floating Popovers / AI Copilot)**: `#FFFFFF` or translucent `#FFFFFF/90` with ambient shadow framing.
+- **Text Primary**: `#0F172A` (Slate 900) with secondary copy at `#475569` (Slate 600) and muted metadata at `#94A3B8` (Slate 400).
+
+## Typography
+
+The typographic hierarchy combines **Geist** for crisp digital architecture, commands, badges, and headers with **Inter** for sustained readability in high-volume thread bodies and compose windows. **JetBrains Mono** is introduced selectively for keyboard command shortcuts, timestamps, and thread metrics.
+
+- Use tight negative tracking (`-0.01em` to `-0.025em`) across display and headline levels to evoke industrial precision.
+- Maintain a strict 13px base for standard inbox list items to balance information density with effortless scanability.
+- Reserve all uppercase transformations exclusively for ultra-compact categorization badges (`label-sm`), styled with subtle letter spacing (`0.02em`).
+
+## Layout & Spacing
+
+The layout operates on a flexible, multi-pane productivity model optimized for keyboard navigation and rapid triage:
+- **Left Rail (Navigation / Folders / Rules)**: Collapsible, 220px default, 64px icon-only.
+- **Center Pane (High-Density Stream)**: Flexible 360px–480px, housing the unified list view.
+- **Right Main Pane (Reading & AI Canvas)**: Fluid container filling remaining viewport space, expandable to full view.
+- **Overlay Dock (AI Copilot)**: 380px fixed-width overlay or floating dock docked to the bottom-right corner.
+
+### Responsive Reflow Rules
+- **Desktop (>= 1280px)**: 3-pane side-by-side configuration with floating AI drawer.
+- **Tablet / Small Desktop (768px - 1279px)**: Left rail collapses to icon-only. List and reading pane share split view or toggle via keyboard shortcut (`Space` / `Esc`).
+- **Mobile (< 768px)**: Single pane view with sliding transitions between list, thread detail, and full-screen AI composer.
+
+## Elevation & Depth
+
+Visual hierarchy rejects exaggerated drop shadows in favor of **low-contrast outlines**, **tonal layering**, and **frosted backdrop blur**.
+
+### Elevation Scale
+- **Base Level (Canvas)**: Non-elevated surface (`#F8FAFC`).
+- **Level 1 (Cards, List Items, Pane Separators)**: `#FFFFFF` surrounded by a uniform `1px solid #E2E8F0`. Hovering an active row introduces `#F1F5F9` without shifting vertical height.
+- **Level 2 (Popovers, Autocomplete Menus, Dropdowns)**: `#FFFFFF` with `1px solid #CBD5E1` and a hyper-subtle ambient shadow: `0 4px 12px -2px rgba(15, 23, 42, 0.06), 0 2px 4px -1px rgba(15, 23, 42, 0.04)`.
+- **Level 3 (Floating AI Copilot Panel & Command Palette `Cmd+K`)**: `rgba(255, 255, 255, 0.85)` surface with `backdrop-filter: blur(12px)`, bounded by a `1px solid rgba(226, 232, 240, 0.8)`, and diffused depth shadow: `0 16px 32px -6px rgba(15, 23, 42, 0.10), 0 4px 8px -2px rgba(15, 23, 42, 0.04)`.
+
+## Shapes
+
+The interface embraces a structured, architectural aesthetic (`roundedness: 1`). Soft 4px (`0.25rem`) corners dominate dense utility controls, ensuring buttons, fields, and badges fit snugly into compact data rows.
+
+- **Micro Controls & Badges**: 4px border radius.
+- **Standard Cards, Thread Containers, & Modals (`rounded-lg`)**: 8px (`0.5rem`) border radius.
+- **Floating Panels & Copilot Overlays (`rounded-xl`)**: 12px (`0.75rem`) border radius.
+- **Avatars & Filter Pills**: Full pill (`9999px`) reserved only for sender avatars and toggle pill filters.
+
+## Components
+
+### Buttons
+- **Primary**: Solid `#2563EB` background, `#FFFFFF` text, subtle inset highlight `inset 0 1px 0 rgba(255, 255, 255, 0.2)`. Padding `0.375rem 0.75rem`, font `Geist 13px weight: 500`.
+- **Secondary**: Crisp `#FFFFFF` surface with `1px solid #CBD5E1`, text `#0F172A`. Active state scales down by `0.98` for tactile responsiveness.
+- **Ghost / Action Icons**: Transparent background, text `#64748B`, hovering shifts to `#F1F5F9` and `#0F172A`.
+
+### Status & Classification Badges (Chips)
+- Compact `18px` height, `4px` radius, padding `0 6px`, font `label-sm` (11px, weight: 500).
+- Tinted subtle background with high-contrast text:
+  - *Assistant to Reply*: Background `rgba(37, 99, 235, 0.08)`, border `rgba(37, 99, 235, 0.2)`, text `#1D4ED8`.
+  - *Client to Reply*: Background `rgba(124, 58, 237, 0.08)`, border `rgba(124, 58, 237, 0.2)`, text `#6D28D9`.
+  - *Needs Review*: Background `rgba(217, 119, 6, 0.08)`, border `rgba(217, 119, 6, 0.2)`, text `#B45309`.
+  - *No Reply Needed*: Background `rgba(100, 116, 139, 0.08)`, border `rgba(100, 116, 139, 0.2)`, text `#475569`.
+  - *Urgent*: Background `rgba(220, 38, 38, 0.08)`, border `rgba(220, 38, 38, 0.2)`, text `#B91C1C`.
+
+### High-Density Email List Rows
+- Uniform `44px` height in dense mode, `56px` in comfortable mode.
+- Separated by hairline dividers (`1px solid #F1F5F9`).
+- Left-aligned sender with fixed `160px` width, truncated subject line in `#0F172A`, inline body preview in `#64748B`, right-aligned status chip and JetBrains Mono timestamp (`11px`).
+- Selected row exhibits a 2px left border accent in `#2563EB` and `#F8FAFC` background.
+
+### Input Fields & Compose Containers
+- Border `1px solid #CBD5E1`, background `#FFFFFF`. Focus ring uses an ambient glow `0 0 0 3px rgba(37, 99, 235, 0.15)` with a border shift to `#2563EB`.
+- Integrated AI Prompt Input: Includes a subtle gradient border transition when active, inline keyboard shortcut pill (`Return ↵`), and an embedded model toggle dropdown.
+
+### Floating AI Copilot Drawer
+- Docked panel with blur effect (`rgba(255, 255, 255, 0.9)`), containing thread summaries, one-click draft suggestions, fact verifications, and custom instruction bars.
+- Header features real-time agent status indicators (e.g., pulsating `2px` green beacon for "Agent Active").

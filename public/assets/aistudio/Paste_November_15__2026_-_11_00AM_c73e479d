@@ -1,0 +1,1540 @@
+# MASTER DEVELOPMENT INSTRUCTION
+## AI-POWERED PERSONAL ASSISTANT EMAIL MANAGEMENT PLATFORM
+
+### YOUR ROLE
+
+Act as a Senior Full-Stack MERN Developer, Software Architect, AI Engineer, Product Designer, Database Architect, and QA Engineer.
+
+You are responsible for developing a complete, functional, production-quality prototype of an AI-powered Personal Assistant Email Management Platform.
+
+Think and work like an experienced software developer working on a real SaaS startup product.
+
+You must take ownership of the entire development process, including:
+
+1. Understanding the requirements.
+2. Designing the application architecture.
+3. Planning the user experience.
+4. Creating the folder and file structure.
+5. Developing the frontend.
+6. Developing the backend.
+7. Designing the database.
+8. Integrating AI capabilities.
+9. Connecting frontend and backend.
+10. Testing all functionality.
+11. Fixing errors.
+12. Preparing the application for deployment.
+
+DO NOT build only a frontend prototype.
+
+DO NOT create a collection of disconnected UI screens.
+
+DO NOT put the entire application inside App.jsx or server.js.
+
+DO NOT generate unnecessary files or poorly organized code.
+
+Build a complete application with clean architecture, reusable components, separation of concerns, and meaningful functionality.
+
+---
+
+# PART 1: UNDERSTAND THE PRODUCT
+
+## Product Name
+
+AI Personal Assistant – Intelligent Email Management Platform.
+
+## Product Objective
+
+Develop an intelligent email management platform that allows personal assistants to manage their clients' email communications efficiently.
+
+The platform must automatically analyze incoming emails, understand their context, determine who should respond, organize conversations, and assist with everyday email management.
+
+There are two primary users:
+
+### 1. Personal Assistant
+
+The assistant manages one or multiple clients' email accounts.
+
+The assistant can:
+
+- Connect email accounts.
+- View all conversations.
+- Organize emails automatically.
+- See important conversations.
+- Identify pending responses.
+- Review AI-generated classifications.
+- Override AI decisions.
+- Draft email replies.
+- Track meetings and appointments.
+- Manage follow-ups.
+- Monitor client communication.
+
+### 2. Client
+
+The client receives a simplified interface.
+
+The client should primarily see conversations that require their personal attention.
+
+The client can:
+
+- Review important emails.
+- Understand why their response is needed.
+- Read AI-generated summaries.
+- Open original conversations.
+- Mark matters as handled.
+- Ask the assistant to take over.
+- Provide instructions or notes.
+
+Both experiences must be connected through the same backend and database.
+
+---
+
+# PART 2: TECHNOLOGY STACK
+
+Use the MERN stack.
+
+## Frontend
+
+- React.js
+- Vite
+- JavaScript
+- Tailwind CSS
+- Framer Motion
+- React Router DOM
+- Lucide React
+- Axios
+- React Hot Toast
+- Recharts
+
+## Backend
+
+- Node.js
+- Express.js
+- JavaScript ES Modules
+
+## Database
+
+- MongoDB
+- Mongoose
+
+## Authentication
+
+- JWT
+- bcrypt
+- Role-based authentication
+- Protected routes
+
+## AI Integration
+
+Use OpenAI API or another configurable LLM provider.
+
+Create a dedicated AI service abstraction so that the AI provider can be replaced without modifying the entire application.
+
+## Email Integration
+
+Support the architecture for:
+
+- Gmail OAuth 2.0.
+- Microsoft Outlook OAuth.
+
+For the prototype, simulated connections and seeded email data are acceptable.
+
+Clearly distinguish simulated integrations from real integrations.
+
+## Development Tools
+
+- Git
+- npm
+- Postman or Thunder Client
+- dotenv
+- Nodemon
+
+Use environment variables for all credentials and configuration.
+
+---
+
+# PART 3: PROFESSIONAL PROJECT ARCHITECTURE
+
+IMPORTANT:
+
+Before writing application code, create the project using a professional MERN monorepo structure.
+
+The frontend and backend must be independent applications inside one root project.
+
+Use the following exact organizational approach.
+
+## ROOT DIRECTORY
+
+personal-assistant-ai/
+│
+├── client/
+│   ├── public/
+│   ├── src/
+│   ├── package.json
+│   ├── vite.config.js
+│   └── index.html
+│
+├── server/
+│   ├── src/
+│   ├── package.json
+│   ├── .env.example
+│   └── server.js
+│
+├── docs/
+│   ├── ARCHITECTURE.md
+│   ├── API_DOCUMENTATION.md
+│   └── DATABASE_SCHEMA.md
+│
+├── .gitignore
+├── package.json
+├── README.md
+└── LICENSE
+
+Do not place frontend files inside the backend directory or vice versa.
+
+## FRONTEND FOLDER STRUCTURE
+
+Create the following structure:
+
+client/
+│
+├── public/
+│   ├── images/
+│   ├── icons/
+│   └── favicon.svg
+│
+├── src/
+│   │
+│   ├── assets/
+│   │   ├── images/
+│   │   ├── icons/
+│   │   └── logos/
+│   │
+│   ├── components/
+│   │   │
+│   │   ├── common/
+│   │   │   ├── Button.jsx
+│   │   │   ├── Input.jsx
+│   │   │   ├── Modal.jsx
+│   │   │   ├── Dropdown.jsx
+│   │   │   ├── Badge.jsx
+│   │   │   ├── Avatar.jsx
+│   │   │   ├── Loader.jsx
+│   │   │   ├── EmptyState.jsx
+│   │   │   └── ConfirmDialog.jsx
+│   │   │
+│   │   ├── layout/
+│   │   │   ├── AppLayout.jsx
+│   │   │   ├── Sidebar.jsx
+│   │   │   ├── Header.jsx
+│   │   │   ├── MobileNavigation.jsx
+│   │   │   └── ProtectedLayout.jsx
+│   │   │
+│   │   ├── dashboard/
+│   │   │   ├── StatCard.jsx
+│   │   │   ├── ActivityFeed.jsx
+│   │   │   ├── PriorityInbox.jsx
+│   │   │   ├── UpcomingMeetings.jsx
+│   │   │   └── DashboardChart.jsx
+│   │   │
+│   │   ├── emails/
+│   │   │   ├── EmailList.jsx
+│   │   │   ├── EmailCard.jsx
+│   │   │   ├── EmailFilters.jsx
+│   │   │   ├── EmailSearch.jsx
+│   │   │   ├── EmailDetails.jsx
+│   │   │   ├── ConversationThread.jsx
+│   │   │   ├── EmailComposer.jsx
+│   │   │   └── ClassificationBadge.jsx
+│   │   │
+│   │   ├── ai/
+│   │   │   ├── AIChatPanel.jsx
+│   │   │   ├── AIMessage.jsx
+│   │   │   ├── AISummary.jsx
+│   │   │   ├── AIClassification.jsx
+│   │   │   ├── AIReplyGenerator.jsx
+│   │   │   └── AIInsightCard.jsx
+│   │   │
+│   │   ├── meetings/
+│   │   │   ├── MeetingCard.jsx
+│   │   │   └── MeetingCalendar.jsx
+│   │   │
+│   │   └── clients/
+│   │       ├── ClientCard.jsx
+│   │       └── ClientSelector.jsx
+│   │
+│   ├── pages/
+│   │   ├── auth/
+│   │   │   ├── Login.jsx
+│   │   │   ├── Register.jsx
+│   │   │   └── ForgotPassword.jsx
+│   │   │
+│   │   ├── onboarding/
+│   │   │   ├── Welcome.jsx
+│   │   │   ├── ConnectEmail.jsx
+│   │   │   └── SetupComplete.jsx
+│   │   │
+│   │   ├── assistant/
+│   │   │   ├── AssistantDashboard.jsx
+│   │   │   ├── AllEmails.jsx
+│   │   │   ├── AssistantToReply.jsx
+│   │   │   ├── ClientToReply.jsx
+│   │   │   ├── NoReplyNeeded.jsx
+│   │   │   ├── NeedsReview.jsx
+│   │   │   ├── ActionRequired.jsx
+│   │   │   ├── WaitingForResponse.jsx
+│   │   │   ├── ImportantEmails.jsx
+│   │   │   ├── Meetings.jsx
+│   │   │   ├── Clients.jsx
+│   │   │   ├── Archived.jsx
+│   │   │   └── Settings.jsx
+│   │   │
+│   │   ├── client/
+│   │   │   ├── ClientDashboard.jsx
+│   │   │   ├── ClientEmailDetails.jsx
+│   │   │   ├── ClientNotifications.jsx
+│   │   │   └── ClientSettings.jsx
+│   │   │
+│   │   └── NotFound.jsx
+│   │
+│   ├── context/
+│   │   ├── AuthContext.jsx
+│   │   ├── EmailContext.jsx
+│   │   ├── NotificationContext.jsx
+│   │   └── ThemeContext.jsx
+│   │
+│   ├── hooks/
+│   │   ├── useAuth.js
+│   │   ├── useEmails.js
+│   │   ├── useAI.js
+│   │   └── useDebounce.js
+│   │
+│   ├── services/
+│   │   ├── api.js
+│   │   ├── authService.js
+│   │   ├── emailService.js
+│   │   ├── aiService.js
+│   │   ├── clientService.js
+│   │   ├── meetingService.js
+│   │   └── dashboardService.js
+│   │
+│   ├── routes/
+│   │   ├── AppRoutes.jsx
+│   │   ├── ProtectedRoute.jsx
+│   │   └── RoleBasedRoute.jsx
+│   │
+│   ├── utils/
+│   │   ├── formatDate.js
+│   │   ├── formatEmail.js
+│   │   ├── constants.js
+│   │   └── helpers.js
+│   │
+│   ├── data/
+│   │   └── demoEmails.js
+│   │
+│   ├── styles/
+│   │   ├── index.css
+│   │   └── animations.css
+│   │
+│   ├── App.jsx
+│   └── main.jsx
+│
+├── package.json
+└── vite.config.js
+
+## BACKEND FOLDER STRUCTURE
+
+server/
+│
+├── src/
+│   │
+│   ├── config/
+│   │   ├── database.js
+│   │   ├── cors.js
+│   │   └── environment.js
+│   │
+│   ├── models/
+│   │   ├── User.js
+│   │   ├── Client.js
+│   │   ├── EmailAccount.js
+│   │   ├── Conversation.js
+│   │   ├── Message.js
+│   │   ├── Action.js
+│   │   ├── Meeting.js
+│   │   └── Activity.js
+│   │
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   ├── userController.js
+│   │   ├── clientController.js
+│   │   ├── emailController.js
+│   │   ├── aiController.js
+│   │   ├── dashboardController.js
+│   │   ├── meetingController.js
+│   │   └── actionController.js
+│   │
+│   ├── routes/
+│   │   ├── authRoutes.js
+│   │   ├── userRoutes.js
+│   │   ├── clientRoutes.js
+│   │   ├── emailRoutes.js
+│   │   ├── aiRoutes.js
+│   │   ├── dashboardRoutes.js
+│   │   ├── meetingRoutes.js
+│   │   └── actionRoutes.js
+│   │
+│   ├── services/
+│   │   ├── ai/
+│   │   │   ├── aiProvider.js
+│   │   │   ├── classificationService.js
+│   │   │   ├── summaryService.js
+│   │   │   ├── replyService.js
+│   │   │   ├── chatService.js
+│   │   │   └── prompts.js
+│   │   │
+│   │   ├── email/
+│   │   │   ├── emailProvider.js
+│   │   │   ├── gmailService.js
+│   │   │   ├── outlookService.js
+│   │   │   └── syncService.js
+│   │   │
+│   │   └── notificationService.js
+│   │
+│   ├── middleware/
+│   │   ├── authMiddleware.js
+│   │   ├── roleMiddleware.js
+│   │   ├── errorMiddleware.js
+│   │   ├── validateMiddleware.js
+│   │   └── rateLimitMiddleware.js
+│   │
+│   ├── validators/
+│   │   ├── authValidator.js
+│   │   ├── emailValidator.js
+│   │   └── aiValidator.js
+│   │
+│   ├── utils/
+│   │   ├── ApiError.js
+│   │   ├── ApiResponse.js
+│   │   ├── asyncHandler.js
+│   │   ├── generateToken.js
+│   │   └── logger.js
+│   │
+│   ├── seed/
+│   │   ├── seedUsers.js
+│   │   ├── seedEmails.js
+│   │   └── seedDatabase.js
+│   │
+│   ├── app.js
+│   └── server.js
+│
+├── tests/
+│   ├── auth.test.js
+│   ├── email.test.js
+│   └── ai.test.js
+│
+├── package.json
+└── .env.example
+
+IMPORTANT FOLDER RULES:
+
+- Models contain only database schemas and model-level logic.
+- Controllers handle HTTP requests and responses.
+- Services contain actual business logic.
+- Routes connect endpoints to controllers.
+- Middleware handles authentication, authorization, validation and errors.
+- Components must be reusable.
+- Pages must compose components rather than contain the entire application.
+- Services on the frontend handle API communication.
+- Context manages shared application state.
+- Hooks contain reusable React logic.
+
+Do not duplicate functionality across files.
+
+If a component is not needed, do not create an empty placeholder merely to satisfy the folder structure.
+
+Every created file must have a meaningful purpose.
+
+---
+
+# PART 4: DESIGN SYSTEM AND VISUAL IDENTITY
+
+The application must look like a premium SaaS product.
+
+Use these products as visual inspiration:
+
+- Linear
+- Superhuman
+- Attio
+- Stripe
+- Notion
+
+Do not copy their interfaces. Develop an original visual identity.
+
+## Visual Direction
+
+Use:
+
+- Soft neutral backgrounds.
+- White content surfaces.
+- Dark charcoal typography.
+- Muted secondary text.
+- Carefully chosen accent colors.
+- Subtle shadows.
+- Thin borders.
+- Consistent spacing.
+- Elegant icons.
+- Smooth transitions.
+- Clear visual hierarchy.
+
+Classification colors:
+
+Assistant to Reply: Blue.
+
+Client to Reply: Purple.
+
+No Reply Needed: Neutral gray.
+
+Needs Review: Amber.
+
+Urgent: Red.
+
+Success: Green.
+
+Use color consistently throughout the platform.
+
+## Typography
+
+Use a professional typography system.
+
+Recommended:
+- Inter
+- Manrope
+- Geist
+
+Use clear font weights and sizes.
+
+## Layout
+
+Desktop:
+- Fixed or collapsible sidebar.
+- Top navigation.
+- Main content area.
+- Optional contextual right panel.
+
+Mobile:
+- Responsive navigation.
+- Collapsible menus.
+- Stacked cards.
+- Full-screen email conversations.
+
+Avoid unnecessary gradients, excessive animations, excessive rounded cards, and generic AI dashboard aesthetics.
+
+The application must feel like a real commercial SaaS platform.
+
+---
+
+# PART 5: AUTHENTICATION AND ONBOARDING
+
+Implement a complete authentication workflow.
+
+Features:
+
+- Registration.
+- Login.
+- Logout.
+- Password hashing.
+- JWT authentication.
+- Protected routes.
+- Role-based access.
+- User session persistence.
+
+Roles:
+
+ASSISTANT
+CLIENT
+
+After login, redirect according to the user's role.
+
+Create a guided onboarding experience:
+
+Step 1: Welcome screen.
+
+Step 2: Select account type.
+
+Step 3: Connect email account.
+
+Step 4: Complete setup.
+
+Step 5: Open dashboard.
+
+Email connection should support Gmail and Outlook interface demonstrations.
+
+For simulated connections, show a clear demo status.
+
+Never collect actual email passwords.
+
+---
+
+# PART 6: ASSISTANT DASHBOARD
+
+Build a comprehensive workspace.
+
+## Sidebar
+
+Include:
+
+- Overview
+- All Emails
+- Assistant to Reply
+- Client to Reply
+- No Reply Needed
+- Needs Review
+- Action Required
+- Waiting for Response
+- Important
+- Meetings
+- Clients
+- Archived
+- Settings
+
+## Dashboard Overview
+
+Show:
+
+- Total conversations.
+- Unread emails.
+- Important emails.
+- Emails requiring action.
+- Assistant response count.
+- Client response count.
+- Waiting for response.
+
+Include:
+
+1. Priority Inbox.
+2. Recent Conversations.
+3. Upcoming Meetings.
+4. Pending Follow-ups.
+5. AI Daily Summary.
+6. Recent Activity.
+
+All dashboard data must come from the backend.
+
+Do not hardcode dashboard statistics.
+
+Create meaningful charts only where they help the user understand the data.
+
+---
+
+# PART 7: EMAIL CLASSIFICATION ENGINE
+
+This is the most important product feature.
+
+Build a proper AI-powered email responsibility classification engine.
+
+Every conversation must be assigned one of four categories:
+
+1. ASSISTANT_TO_REPLY
+2. CLIENT_TO_REPLY
+3. NO_REPLY_NEEDED
+4. NEEDS_REVIEW
+
+## Classification Logic
+
+AI must consider:
+
+- Email subject.
+- Message content.
+- Sender information.
+- Recipient information.
+- Previous conversation history.
+- Explicit requests.
+- Business context.
+- Personal context.
+- Urgency.
+- Whether the issue has already been resolved.
+
+## Example 1: Assistant to Reply
+
+Subject: Request to reschedule tomorrow's meeting.
+
+Reason:
+This is a routine administrative task.
+
+Classification:
+ASSISTANT_TO_REPLY.
+
+## Example 2: Client to Reply
+
+Subject: Approval required for partnership agreement.
+
+Reason:
+The sender requires the client's personal decision.
+
+Classification:
+CLIENT_TO_REPLY.
+
+## Example 3: No Reply Needed
+
+Subject: Monthly newsletter.
+
+Reason:
+Informational email without a response requirement.
+
+Classification:
+NO_REPLY_NEEDED.
+
+## Example 4: Needs Review
+
+Subject: Regarding the proposal we discussed.
+
+Reason:
+The available context is insufficient to determine responsibility.
+
+Classification:
+NEEDS_REVIEW.
+
+## AI Classification Output
+
+Return structured JSON:
+
+{
+  "classification": "CLIENT_TO_REPLY",
+  "confidence": 0.94,
+  "reason": "The sender requires the client's personal approval.",
+  "summary": "A partnership proposal is awaiting approval.",
+  "suggestedAction": "Review and approve the proposal.",
+  "priority": "HIGH",
+  "requiresResponse": true
+}
+
+Validate AI output before storing it.
+
+If the AI provider is unavailable, use a clearly identified fallback classifier for the demo.
+
+Do not pretend a fallback result is an LLM-generated result.
+
+## Manual Override
+
+The assistant must be able to:
+
+- Change classifications.
+- Edit the reason.
+- Assign responsibility.
+- Mark as completed.
+- Request AI reclassification.
+
+Manual decisions must take precedence over automatic classification until the user explicitly requests reclassification or the relevant conversation context changes.
+
+## Confidence Handling
+
+High confidence:
+Automatically classify.
+
+Medium confidence:
+Show classification with a review indicator.
+
+Low confidence:
+Assign NEEDS_REVIEW.
+
+Store confidence and classification history.
+
+---
+
+# PART 8: EMAIL MANAGEMENT
+
+Create a complete email workspace.
+
+Features:
+
+- Email list.
+- Conversation threads.
+- Search.
+- Filters.
+- Sorting.
+- Pagination.
+- Unread status.
+- Important status.
+- Archive.
+- Restore.
+- Classification override.
+- Mark as completed.
+
+Each email card should show:
+
+- Sender avatar.
+- Sender name.
+- Subject.
+- Preview.
+- Timestamp.
+- Classification badge.
+- Priority indicator.
+- Unread indicator.
+
+## Email Details
+
+When a conversation is opened, display:
+
+- Sender information.
+- Subject.
+- Complete conversation history.
+- Message timestamps.
+- AI summary.
+- AI classification.
+- Classification confidence.
+- Explanation.
+- Recommended action.
+
+Include a reply composer.
+
+Allow users to prepare, edit, review, and simulate sending replies.
+
+---
+
+# PART 9: CLIENT DASHBOARD
+
+Build an entirely separate client experience.
+
+Do not simply reuse the assistant dashboard with fewer sidebar items.
+
+The client interface should be minimalistic.
+
+Display:
+
+- Greeting.
+- Emails requiring attention.
+- Important conversations.
+- AI summaries.
+- Pending decisions.
+
+Each conversation should show:
+
+- Sender.
+- Subject.
+- Received date.
+- AI summary.
+- Why the client needs to respond.
+- Priority.
+
+Actions:
+
+1. Open conversation.
+2. Mark as handled.
+3. Ask assistant to take over.
+4. Add note.
+5. Review suggested response.
+
+When a client requests assistant takeover, update the classification and assignment in the database.
+
+The assistant dashboard must immediately reflect that change when refreshed.
+
+Ensure that clients can only access their own authorized conversations.
+
+---
+
+# PART 10: AI ASSISTANT
+
+Create an AI chat assistant within the application.
+
+The assistant must understand the email database.
+
+Suggested questions:
+
+- Show all emails requiring my attention.
+- Summarize today's important conversations.
+- Which emails are waiting for responses?
+- What should I prioritize today?
+- Show emails assigned to me.
+- Which conversations require client approval?
+- Find unanswered meeting requests.
+- Draft a reply to this conversation.
+- Why was this email classified as client to reply?
+
+The AI must retrieve relevant application data before answering.
+
+Implement:
+
+1. Chat interface.
+2. Message history.
+3. Context-aware responses.
+4. Email references.
+5. Suggested questions.
+6. Loading states.
+7. Error handling.
+
+Do not create a chatbot that only returns predefined text.
+
+---
+
+# PART 11: AI EMAIL SUMMARIZATION
+
+Implement conversation summarization.
+
+The AI should extract:
+
+- Main topic.
+- Important information.
+- Decisions.
+- Requests.
+- Pending actions.
+- Deadlines.
+- Next steps.
+
+Display summaries in a visually clear interface.
+
+Allow the user to regenerate summaries.
+
+Store generated summaries in MongoDB.
+
+---
+
+# PART 12: AI EMAIL REPLY GENERATION
+
+Create an intelligent reply composer.
+
+Features:
+
+- Generate a professional reply.
+- Rewrite existing draft.
+- Make it shorter.
+- Make it more formal.
+- Make it friendlier.
+- Improve grammar.
+- Change tone.
+- Copy response.
+
+The user must review and approve every AI-generated draft.
+
+Never automatically send emails.
+
+For demo mode, simulate sending and update the conversation state appropriately.
+
+---
+
+# PART 13: MEETINGS AND ACTION EXTRACTION
+
+AI should extract useful information from email conversations.
+
+Identify:
+
+- Meeting requests.
+- Meeting dates.
+- Appointment times.
+- Deadlines.
+- Follow-ups.
+- Pending approvals.
+- Tasks.
+
+Create a Meetings page.
+
+Create an Action Required page.
+
+Allow assistants to:
+
+- View tasks.
+- Set due dates.
+- Mark tasks completed.
+- Review the source email.
+
+Use proper date handling and timezone awareness.
+
+---
+
+# PART 14: DATABASE DESIGN
+
+Use MongoDB and Mongoose.
+
+Create the following models.
+
+## User
+
+Fields:
+
+- name
+- email
+- password
+- role
+- avatar
+- createdAt
+- updatedAt
+
+## Client
+
+Fields:
+
+- name
+- email
+- assistantId
+- createdAt
+
+## EmailAccount
+
+Fields:
+
+- userId
+- clientId
+- provider
+- emailAddress
+- connectionStatus
+- lastSyncedAt
+
+## Conversation
+
+Fields:
+
+- emailAccountId
+- clientId
+- subject
+- participants
+- classification
+- confidence
+- classificationReason
+- summary
+- priority
+- status
+- assignedTo
+- requiresResponse
+- isImportant
+- isUnread
+- isArchived
+- createdAt
+- updatedAt
+
+## Message
+
+Fields:
+
+- conversationId
+- sender
+- recipients
+- body
+- receivedAt
+- attachments
+
+## Action
+
+Fields:
+
+- conversationId
+- title
+- description
+- dueDate
+- status
+- assignedTo
+
+## Meeting
+
+Fields:
+
+- conversationId
+- title
+- date
+- time
+- participants
+- location
+- status
+
+## Activity
+
+Fields:
+
+- userId
+- conversationId
+- action
+- description
+- timestamp
+
+Create proper references, indexes, validation, and relationships.
+
+Avoid unnecessary duplication.
+
+---
+
+# PART 15: REST API DEVELOPMENT
+
+Create RESTful APIs.
+
+## Authentication
+
+POST /api/auth/register
+
+POST /api/auth/login
+
+GET /api/auth/me
+
+POST /api/auth/logout
+
+## Dashboard
+
+GET /api/dashboard/stats
+
+GET /api/dashboard/activity
+
+GET /api/dashboard/overview
+
+## Email Management
+
+GET /api/emails
+
+GET /api/emails/:id
+
+PATCH /api/emails/:id
+
+PATCH /api/emails/:id/classification
+
+PATCH /api/emails/:id/archive
+
+PATCH /api/emails/:id/read
+
+PATCH /api/emails/:id/complete
+
+## AI
+
+POST /api/ai/classify
+
+POST /api/ai/summarize
+
+POST /api/ai/draft-reply
+
+POST /api/ai/chat
+
+POST /api/ai/extract-actions
+
+## Clients
+
+GET /api/clients
+
+POST /api/clients
+
+GET /api/clients/:id
+
+PATCH /api/clients/:id
+
+## Actions
+
+GET /api/actions
+
+POST /api/actions
+
+PATCH /api/actions/:id
+
+## Meetings
+
+GET /api/meetings
+
+POST /api/meetings
+
+PATCH /api/meetings/:id
+
+## Email Accounts
+
+GET /api/accounts
+
+POST /api/accounts/connect
+
+DELETE /api/accounts/:id
+
+Implement proper:
+
+- Request validation.
+- Authentication.
+- Role authorization.
+- Error handling.
+- HTTP status codes.
+- Consistent JSON responses.
+
+---
+
+# PART 16: FRONTEND FUNCTIONALITY
+
+Every visible interactive element must work.
+
+Examples:
+
+- Sidebar navigation changes pages.
+- Search filters conversations.
+- Classification filters work.
+- Email cards open conversation details.
+- Mark as read updates database.
+- Archive updates email status.
+- Important toggle works.
+- Classification override works.
+- AI summary generates content.
+- Reply generation works.
+- Client actions update assistant data.
+- Dashboard statistics update.
+- Notifications appear.
+- Settings save changes.
+
+Do not use decorative buttons without functionality.
+
+Do not leave TODO placeholders in core workflows.
+
+---
+
+# PART 17: SAMPLE DATA AND DEMO MODE
+
+Create realistic seed data.
+
+Minimum:
+
+- 2 assistant accounts.
+- 3 client accounts.
+- 25–30 realistic conversations.
+- Multiple messages in some conversation threads.
+- Different priorities.
+- Multiple email categories.
+- Upcoming meetings.
+- Pending actions.
+
+Include realistic scenarios:
+
+- Business inquiries.
+- Appointment requests.
+- Client approvals.
+- Financial discussions.
+- Administrative tasks.
+- Newsletters.
+- Meeting confirmations.
+- Follow-up requests.
+- Important updates.
+
+Create demo login credentials and document them in README.
+
+Make demo mode usable without requiring paid external APIs.
+
+Ensure demo mode is clearly indicated.
+
+---
+
+# PART 18: RESPONSIVE DESIGN
+
+Desktop:
+
+- Complete sidebar.
+- Header.
+- Dashboard overview.
+- Email list.
+- Conversation workspace.
+
+Tablet:
+
+- Collapsible sidebar.
+- Responsive grids.
+- Adaptive email layout.
+
+Mobile:
+
+- Mobile navigation.
+- Stacked email cards.
+- Full-screen conversation details.
+- Responsive chat assistant.
+- Touch-friendly buttons.
+
+Test common screen sizes.
+
+Prevent horizontal overflow.
+
+---
+
+# PART 19: ERROR HANDLING AND SECURITY
+
+Implement:
+
+- Password hashing.
+- JWT verification.
+- Role-based authorization.
+- Input validation.
+- API error handling.
+- Rate limiting.
+- CORS configuration.
+- Environment variable protection.
+- Secure token handling.
+- Data access restrictions.
+
+Never expose:
+
+- API keys.
+- Database credentials.
+- JWT secrets.
+- OAuth client secrets.
+
+Never commit .env files.
+
+Protect all client and assistant data according to account relationships.
+
+Do not expose one client's emails to another client.
+
+---
+
+# PART 20: DEVELOPMENT EXECUTION WORKFLOW
+
+Follow the development workflow below.
+
+IMPORTANT: This is an execution instruction, not merely a planning exercise.
+
+You must implement the application.
+
+## PHASE 1: PROJECT INITIALIZATION
+
+- Inspect the existing working directory.
+- Preserve useful existing files.
+- Create the root project.
+- Initialize frontend and backend.
+- Install required dependencies.
+- Create the complete folder structure.
+- Configure development scripts.
+- Configure environment variables.
+
+## PHASE 2: DESIGN SYSTEM
+
+- Define colors.
+- Define typography.
+- Define spacing.
+- Create reusable buttons.
+- Create reusable inputs.
+- Create reusable badges.
+- Create layout components.
+- Create responsive navigation.
+
+## PHASE 3: FRONTEND
+
+Implement:
+
+- Authentication.
+- Onboarding.
+- Assistant dashboard.
+- Email management.
+- Conversation details.
+- Client dashboard.
+- AI chat interface.
+- Meetings.
+- Settings.
+
+Use reusable components.
+
+## PHASE 4: BACKEND
+
+Implement:
+
+- Express server.
+- MongoDB connection.
+- Mongoose models.
+- Authentication.
+- Controllers.
+- Services.
+- Routes.
+- Middleware.
+- Error handling.
+
+## PHASE 5: AI IMPLEMENTATION
+
+Implement:
+
+- Email classification.
+- Confidence scores.
+- Conversation summaries.
+- Reply generation.
+- Action extraction.
+- AI chat.
+
+Create a configurable AI provider.
+
+## PHASE 6: INTEGRATION
+
+Connect:
+
+- Frontend APIs.
+- Backend services.
+- MongoDB.
+- AI services.
+- Authentication.
+- Role-based dashboards.
+
+## PHASE 7: SEED DATA
+
+Create realistic sample users, clients, conversations, messages, actions, and meetings.
+
+## PHASE 8: TESTING
+
+Test:
+
+- Registration.
+- Login.
+- Protected routes.
+- Email filtering.
+- Email details.
+- Classification.
+- Manual override.
+- AI summaries.
+- AI reply generation.
+- Client actions.
+- Database persistence.
+- Responsive layouts.
+
+## PHASE 9: FINAL POLISH
+
+- Fix UI inconsistencies.
+- Fix broken navigation.
+- Fix API errors.
+- Fix console warnings.
+- Improve loading states.
+- Improve empty states.
+- Improve error messages.
+- Optimize responsiveness.
+
+## PHASE 10: DEPLOYMENT
+
+Prepare:
+
+- Frontend deployment.
+- Backend deployment.
+- MongoDB Atlas configuration.
+- Environment variable documentation.
+- Production build.
+- README.
+- Demo credentials.
+
+---
+
+# PART 21: CODE QUALITY RULES
+
+Follow these rules throughout development.
+
+1. Use proper folder organization.
+2. Write modular code.
+3. Avoid unnecessarily large components.
+4. Use reusable components.
+5. Keep API logic outside UI components.
+6. Keep database logic inside models and services.
+7. Keep business logic out of route definitions.
+8. Use consistent naming conventions.
+9. Avoid duplicate code.
+10. Avoid unnecessary dependencies.
+11. Use meaningful variable and function names.
+12. Add comments only where useful.
+13. Keep frontend and backend independent.
+14. Never hardcode secret credentials.
+15. Never create fake functionality for core features.
+16. Maintain clean and readable code.
+17. Ensure every import resolves correctly.
+18. Ensure every route has a working implementation.
+19. Avoid unnecessary files.
+20. Do not leave incomplete core features.
+
+---
+
+# PART 22: FINAL ACCEPTANCE CRITERIA
+
+The application is complete only when the following are demonstrable:
+
+[ ] User registration and login.
+
+[ ] Role-based authentication.
+
+[ ] Onboarding.
+
+[ ] Email account connection demonstration.
+
+[ ] Assistant dashboard.
+
+[ ] Client dashboard.
+
+[ ] Email list and conversation details.
+
+[ ] Email classification.
+
+[ ] AI confidence scores.
+
+[ ] Classification explanations.
+
+[ ] Manual classification override.
+
+[ ] AI-generated summaries.
+
+[ ] AI reply generation.
+
+[ ] AI chat assistant.
+
+[ ] Search and filtering.
+
+[ ] Important emails.
+
+[ ] Archive functionality.
+
+[ ] Action extraction.
+
+[ ] Meeting identification.
+
+[ ] Client-to-assistant handover.
+
+[ ] Database persistence.
+
+[ ] Responsive design.
+
+[ ] Working navigation.
+
+[ ] Error and loading states.
+
+[ ] Proper project documentation.
+
+[ ] Successful frontend build.
+
+[ ] Successful backend startup.
+
+[ ] Successful integration testing.
+
+---
+
+# PART 23: FINAL INSTRUCTIONS TO THE CODING AGENT
+
+You are responsible for delivering the complete application, not just explaining how to build it.
+
+Start by inspecting the project directory.
+
+If no project exists, initialize it.
+
+If a project already exists, inspect its contents before modifying anything.
+
+Create the folder structure before implementing features.
+
+Do not put the entire application in one file.
+
+Do not stop after generating the architecture.
+
+Do not stop after creating the frontend.
+
+Do not stop after making the dashboard visually attractive.
+
+Continue until the backend, database, AI functionality, and frontend are integrated.
+
+If a real external integration requires credentials that are unavailable, implement a clearly labelled demo mode with realistic functionality.
+
+If you encounter errors, diagnose and fix them instead of working around them with incomplete code.
+
+Do not claim that something works unless you have tested it.
+
+Do not ask for approval after every development phase. Make reasonable engineering decisions and continue.
+
+When finished, provide:
+
+1. Complete project folder structure.
+2. List of implemented features.
+3. Technologies and dependencies used.
+4. Installation instructions.
+5. Environment variable instructions.
+6. MongoDB setup instructions.
+7. AI API setup instructions.
+8. Demo login credentials.
+9. Commands to run frontend and backend.
+10. Testing results.
+11. Deployment instructions.
+
+FINAL GOAL:
+
+Deliver a professionally designed, fully navigable, functional MERN application that demonstrates the complete vision of an AI-powered Personal Assistant Email Management Platform.
+
+Build it as though you are developing a real SaaS product for actual users.
+
+Prioritize exceptional UI/UX, intelligent AI functionality, clean architecture, reliable interactions, and maintainable code.
+
+DO NOT COMPROMISE ON CODE ORGANIZATION OR PRODUCT QUALITY.
