@@ -1,27 +1,18 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { ArrowLeftRight, Bot, LogOut, Menu } from "lucide-react";
+import { Bot, LogOut, Menu } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { useEmails } from "../../hooks/useEmails";
 import { Avatar } from "../common/Avatar";
 import { Button } from "../common/Button";
-import toast from "react-hot-toast";
+import { WorkspaceSwitcher } from "./WorkspaceSwitcher";
 function Header({ title, onOpenMobileMenu, showClientFilter = true }) {
-  const { user, logout, switchDemoRole } = useAuth();
+  const { user, logout } = useAuth();
   const { clients, selectedClientId, setSelectedClientId, copilotOpen, setCopilotOpen, setCopilotConversationId } = useEmails();
   const navigate = useNavigate();
   const handleLogout = async () => {
     await logout();
     navigate("/register");
-  };
-  const handleSwitchDemoRole = async () => {
-    const role = user?.role === "ASSISTANT" ? "CLIENT" : "ASSISTANT";
-    try {
-      const nextUser = await switchDemoRole(role);
-      navigate(nextUser.role === "ASSISTANT" ? "/assistant" : "/client");
-    } catch {
-      toast.error("Could not switch demo workspace");
-    }
   };
   return /* @__PURE__ */ jsxs("header", { className: "h-14 px-4 sm:px-6 bg-white border-b border-[#E2E8F0] flex items-center justify-between gap-4 shrink-0", children: [
     /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-3 min-w-0", children: [
@@ -55,19 +46,7 @@ function Header({ title, onOpenMobileMenu, showClientFilter = true }) {
           ]
         }
       ),
-      user && /* @__PURE__ */ jsxs(
-        Button,
-        {
-          size: "sm",
-          variant: "secondary",
-          onClick: handleSwitchDemoRole,
-          title: `Switch to ${user.role === "ASSISTANT" ? "Client" : "Executive"} demo view`,
-          children: [
-            /* @__PURE__ */ jsx(ArrowLeftRight, { className: "h-3.5 w-3.5" }),
-            /* @__PURE__ */ jsx("span", { className: "hidden sm:inline", children: user.role === "ASSISTANT" ? "Client view" : "Executive view" })
-          ]
-        }
-      ),
+      user && /* @__PURE__ */ jsx(WorkspaceSwitcher, {}),
       /* @__PURE__ */ jsxs(
         Button,
         {

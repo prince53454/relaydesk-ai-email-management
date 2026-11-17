@@ -93,7 +93,7 @@ const oauthCallback = asyncHandler(async (req, res) => {
     if (existing) await dataStore.updateEmailAccount(existing.id, account);
     else await dataStore.createEmailAccount(account);
     await syncEmailAccount(account.id);
-    const destination = connectedUser.role === "CLIENT" ? "/client" : "/assistant";
+    const destination = connectedUser.role === "CLIENT" ? "/open-executive-demo" : "/assistant";
     res.redirect(`${env.APP_URL.replace(/\/$/, "")}${destination}?emailConnected=${provider.toLowerCase()}`);
   } catch (error) {
     let destination = "/assistant/settings";

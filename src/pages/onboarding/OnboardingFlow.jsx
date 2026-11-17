@@ -10,7 +10,7 @@ import { Button } from "../../components/common/Button";
 import { Input } from "../../components/common/Input";
 import toast from "react-hot-toast";
 function OnboardingFlow() {
-  const { user, setUser } = useAuth();
+  const { user, setUser, switchDemoRole } = useAuth();
   const { clients } = useEmails();
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
@@ -53,7 +53,10 @@ function OnboardingFlow() {
       });
       setUser(updated);
       toast.success("Workspace ready");
-      navigate(updated.role === "ASSISTANT" ? "/assistant" : "/client");
+      if (updated.role === "CLIENT") {
+        await switchDemoRole("ASSISTANT");
+      }
+      navigate("/assistant");
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Failed to complete onboarding");
     } finally {

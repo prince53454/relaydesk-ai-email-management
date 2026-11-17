@@ -8,6 +8,7 @@ import { RoleBasedRoute } from "./RoleBasedRoute";
 const lazyPage = (load, name) => lazy(() => load().then((module) => ({ default: module[name] })));
 
 const Login = lazyPage(() => import("../pages/auth/Login.jsx"), "Login");
+const OpenExecutiveDemo = lazyPage(() => import("../pages/auth/OpenExecutiveDemo.jsx"), "OpenExecutiveDemo");
 const Home = lazyPage(() => import("../pages/Home.jsx"), "Home");
 const Register = lazyPage(() => import("../pages/auth/Register.jsx"), "Register");
 const OnboardingFlow = lazyPage(() => import("../pages/onboarding/OnboardingFlow.jsx"), "OnboardingFlow");
@@ -36,6 +37,7 @@ function AppRoutes() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/open-executive-demo" element={<ProtectedRoute><OpenExecutiveDemo /></ProtectedRoute>} />
           <Route path="/register" element={<Register />} />
           <Route path="/onboarding" element={<ProtectedRoute><OnboardingFlow /></ProtectedRoute>} />
           <Route path="/assistant" element={<AssistantRoute><AssistantDashboard /></AssistantRoute>} />
